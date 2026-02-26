@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond Chatbots: Shipping Stateful AI Agents on AWS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/theme/white.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/github.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      safelist: ['text-4xl', 'text-5xl', 'text-2xl', 'text-xl', 'text-lg', 'text-sm', 'text-base', 'font-bold', 'font-semibold', 'mb-2', 'mb-4', 'mb-6', 'mt-4', 'mt-6', 'text-gray-900', 'text-gray-600', 'text-gray-700', 'text-blue-600', 'list-disc', 'pl-4', 'pl-6', 'space-y-1', 'space-y-2', 'grid', 'grid-cols-2', 'grid-cols-3', 'gap-6', 'gap-8', 'bg-white', 'rounded-lg', 'border', 'border-gray-200', 'p-4', 'shadow-sm', 'md:text-5xl', 'md:text-2xl', 'max-w-md', 'max-w-sm', 'max-w-lg', 'mx-auto', 'w-full']
+    }
+  </script>
+  <style>
+    /* martinmueller.dev aligned: light bg, dark text, blue accents */
+    .reveal { --r-background-color: #f9fafb; --r-main-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .reveal-viewport { background: #f9fafb; }
+    .reveal h1, .reveal h2, .reveal h3 { color: #111827; font-weight: 600; }
+    .reveal p, .reveal li { color: #374151; }
+    .reveal a { color: #2563eb; }
+    .reveal .progress { background: #e5e7eb; }
+    .reveal .progress span { background: #2563eb; }
+    .reveal { --r-main-font-size: 28px; }
+    .reveal pre { font-size: 0.65em; box-shadow: none; }
+    .reveal pre code { max-height: 400px; word-wrap: break-word; white-space: pre-wrap; }
+    .reveal .slide-number { color: #6b7280; background: transparent; font-size: 0.7em; }
+    .reveal section { text-align: left; }
+    .reveal section.title-slide { text-align: center; }
+    .reveal .slides section[data-section-title]:not(.title-slide) { padding-top: 2.5rem; }
+    .reveal .slides section[data-section-title]:not(.title-slide)::before { content: attr(data-section-title); position: absolute; top: 0.5rem; left: 1.5rem; font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.08em; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/highlight.js"></script>
+  <script src="content.js"></script>
+  <script>
+    const slidesEl = document.querySelector('.reveal .slides');
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function renderSlide(slide) {
+      const section = document.createElement('section');
+      section.setAttribute('data-auto-animate', '');
+      if (slide.section) section.setAttribute('data-section-title', slide.section);
+      if (slide.layout === 'title') section.classList.add('title-slide');
+
+      let inner = '';
+      const layout = slide.layout || 'default';
+
+      if (layout === 'title') {
+        inner = `
+          <h1 class="text-5xl font-bold text-gray-900 mb-6">${escapeHtml(slide.title)}</h1>
+          ${slide.subtitle ? `<p class="text-2xl text-gray-600">${escapeHtml(slide.subtitle)}</p>` : ''}
+        `;
+      } else if (layout === 'diagram') {
+        inner = `
+          <h2 class="text-3xl font-semibold text-gray-900 mb-2">${escapeHtml(slide.title)}</h2>
+          ${slide.subtitle ? `<p class="text-xl text-gray-600 mb-4">${escapeHtml(slide.subtitle)}</p>` : ''}
+          ${slide.svg ? `<div class="mb-4">${slide.svg}</div>` : ''}
+          ${slide.bullets && slide.bullets.length ? `<ul class="text-lg text-gray-700 list-disc pl-6 space-y-1">${slide.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}</ul>` : ''}
+        `;
+      } else if (layout === 'three-column' && slide.cols) {
+        inner = `
+          <h2 class="text-3xl font-semibold text-gray-900 mb-4">${escapeHtml(slide.title)}</h2>
+          ${slide.subtitle ? `<p class="text-xl text-gray-600 mb-6">${escapeHtml(slide.subtitle)}</p>` : ''}
+          <div class="grid grid-cols-3 gap-6">
+            ${slide.cols.map(col => `
+              <div class="bg-white rounded-lg border border-gray-200 p-5 shadow-sm">
+                <h3 class="text-xl font-semibold text-blue-600 mb-3">${escapeHtml(col.title)}</h3>
+                <ul class="text-base text-gray-700 list-disc pl-5 space-y-1">${(col.bullets || []).map(b => `<li>${escapeHtml(b)}</li>`).join('')}</ul>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if ((layout === 'two-column' || layout === 'default') && slide.cols) {
+        inner = `
+          <h2 class="text-3xl font-semibold text-gray-900 mb-4">${escapeHtml(slide.title)}</h2>
+          ${slide.subtitle ? `<p class="text-xl text-gray-600 mb-4">${escapeHtml(slide.subtitle)}</p>` : ''}
+          <div class="grid grid-cols-2 gap-8">
+            ${slide.cols.map(col => `
+              <div>
+                <h3 class="text-xl font-semibold text-blue-600 mb-3">${escapeHtml(col.title)}</h3>
+                ${(col.bullets || []).length ? `<ul class="text-base text-gray-700 list-disc pl-5 space-y-1">${col.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}</ul>` : ''}
+                ${(col.codeBlocks || []).map(cb => `
+                  <p class="text-sm text-gray-500 font-semibold mt-3 mb-1">${escapeHtml(cb.label || '')}</p>
+                  <pre class="text-sm mt-0"><code class="language-${cb.lang || 'json'}">${escapeHtml(cb.text)}</code></pre>
+                `).join('')}
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (layout === 'two-column' && slide.code) {
+        inner = `
+          <h2 class="text-3xl font-semibold text-gray-900 mb-4">${escapeHtml(slide.title)}</h2>
+          ${slide.subtitle ? `<p class="text-xl text-gray-600 mb-4">${escapeHtml(slide.subtitle)}</p>` : ''}
+          <div class="grid grid-cols-2 gap-6 items-start">
+            <div>
+              ${slide.bullets && slide.bullets.length ? `<ul class="text-base text-gray-700 list-disc pl-5 space-y-1">${slide.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}</ul>` : ''}
+            </div>
+            <div>
+              <pre class="text-sm"><code class="language-${slide.code.lang || 'typescript'}">${escapeHtml(slide.code.text)}</code></pre>
+            </div>
+          </div>
+        `;
+      } else {
+        inner = `
+          <h2 class="text-3xl font-semibold text-gray-900 mb-4">${escapeHtml(slide.title)}</h2>
+          ${slide.subtitle ? `<p class="text-xl text-gray-600 mb-4">${escapeHtml(slide.subtitle)}</p>` : ''}
+          ${slide.bullets && slide.bullets.length ? `<ul class="text-xl text-gray-700 list-disc pl-6 space-y-3">${slide.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}</ul>` : ''}
+          ${slide.code ? `<pre class="mt-4"><code class="language-${slide.code.lang || 'typescript'}">${escapeHtml(slide.code.text)}</code></pre>` : ''}
+          ${slide.svg ? `<div class="mt-6">${slide.svg}</div>` : ''}
+        `;
+      }
+
+      section.innerHTML = inner;
+      slidesEl.appendChild(section);
+    }
+
+    // Render all slides from SLIDES (loaded from content.js)
+    if (typeof SLIDES !== 'undefined') {
+      SLIDES.forEach(renderSlide);
+    } else {
+      slidesEl.innerHTML = '<section><h1>Error</h1><p>content.js not loaded. Serve via HTTP (e.g. npx serve).</p></section>';
+    }
+
+    Reveal.initialize({
+      hash: true,
+      progress: true,
+      slideNumber: 'c/t',
+      showSlideNumber: 'all',
+      center: false,
+      transition: 'slide',
+      backgroundTransition: 'fade',
+      plugins: [RevealHighlight],
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+- application [ref=e2]:
+  - generic:
+    - generic [ref=e3]:
+      - heading "Beyond Chatbots" [level=1] [ref=e4]
+      - paragraph [ref=e5]: Shipping Stateful AI Agents on AWS
+    - generic:
+      - text: Intro
+      - heading [level=2]: Agenda
+      - list:
+        - listitem: AI Agent Concepts — LLM, tools, memory, control loop, MCP, sub-agents, skills
+        - listitem: Why Infrastructure Matters — the prototype-to-production gap
+        - listitem: AWS Bedrock AgentCore — Fargate for agents, ai-secure.dev walkthrough
+        - listitem: Hard Lessons & Economics — Docker parity, error handling, IaC, cost optimization
+        - listitem: Q&A — 15 min
+    - generic:
+      - text: AI Agent Concepts
+      - heading [level=2]: What is an AI Agent?
+      - paragraph: More than a chatbot
+      - generic:
+        - img:
+          - generic: LLM
+          - generic: Tools
+          - generic: Memory
+          - generic: Loop
+      - list:
+        - listitem: LLM — reasoning & generation
+        - listitem: Tools — call functions, APIs, browse
+        - listitem: Memory — short-term (conversation) + long-term (persistent)
+        - listitem: Control Loop — observe → reason → act
+    - text: AI Agent Concepts AI Agent Concepts AI Agent Concepts AI Agent Concepts AI Agent Concepts AI Agent Concepts AI Agent Concepts AI Agent Concepts AI Agent Concepts Why Infrastructure Matters Why Infrastructure Matters AWS Bedrock AgentCore AWS Bedrock AgentCore AWS Bedrock AgentCore AWS Bedrock AgentCore AWS Bedrock AgentCore AWS Bedrock AgentCore Hard Lessons & Economics Hard Lessons & Economics Hard Lessons & Economics Hard Lessons & Economics Hard Lessons & Economics Wrap-up Wrap-up
+  - link "1 / 31" [ref=e10] [cursor=pointer]:
+    - /url: "#/"
+  - complementary:
+    - button "next slide" [ref=e11] [cursor=pointer]
+  - text: Speaker notes
+  - generic [ref=e14]: Beyond Chatbots Shipping Stateful AI Agents on AWS
