@@ -10,6 +10,10 @@ const SLIDES = [
     title: "Beyond Chatbots",
     subtitle: "Shipping Stateful AI Agents on AWS",
     layout: "title",
+    html: `<div style="margin-top:2rem;display:flex;flex-direction:column;align-items:center;gap:1rem">
+      <img src="linkedin_qr.jpg" alt="LinkedIn QR Code" style="width:180px;height:180px;border-radius:8px" />
+      <a href="https://www.linkedin.com/in/martinmueller88/" target="_blank" rel="noopener" style="font-size:18px">linkedin.com/in/martinmueller88</a>
+    </div>`,
   },
   {
     id: "agenda",
@@ -20,7 +24,7 @@ const SLIDES = [
       "Why Infrastructure Matters — the prototype-to-production gap",
       "AWS Bedrock AgentCore — Fargate for agents, ai-secure.dev walkthrough",
       "Hard Lessons & Economics — Docker parity, error handling, IaC, cost optimization",
-      "Q&A — 15 min",
+      "Q&A",
     ],
     layout: "default",
   },
@@ -75,27 +79,6 @@ const SLIDES = [
       <defs><marker id="arr-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"/></marker></defs>
     </svg>`,
     layout: "diagram",
-  },
-  {
-    id: "agents-vs-chat-vs-rag",
-    section: "AI Agent Concepts",
-    title: "Agents vs Chatbots vs RAG",
-    subtitle: "Different paradigms",
-    layout: "three-column",
-    cols: [
-      {
-        title: "Chatbot",
-        bullets: ["Single turn (mostly)", "No tools", "Stateless", "Simple orchestration", "Ex: customer FAQ bot, ChatGPT without tools"],
-      },
-      {
-        title: "RAG",
-        bullets: ["Retrieval-Augmented Generation", "No tools (doc retrieval only)", "Stateless", "Fixed retrieval flow", "Ex: search over company docs, Notion AI"],
-      },
-      {
-        title: "Agent",
-        bullets: ["Multi-turn, loops", "Tools + external actions", "Stateful (memory)", "Autonomous decisions", "Ex: Cursor, Claude Code, ai-secure.dev"],
-      },
-    ],
   },
   {
     id: "tool-use",
@@ -629,7 +612,32 @@ const agentCore = new AgentCoreRuntime(this, 'Agent', {
     id: "qa",
     section: "Wrap-up",
     title: "Q&A",
-    subtitle: "15 min",
+    subtitle: "Thanks for listening!",
     layout: "title",
+    html: `<div style="margin-top:2rem;display:flex;flex-direction:column;align-items:center;gap:1rem">
+      <img src="linkedin_qr.jpg" alt="LinkedIn QR Code" style="width:180px;height:180px;border-radius:8px" />
+      <a href="https://www.linkedin.com/in/martinmueller88/" target="_blank" rel="noopener" style="font-size:18px">linkedin.com/in/martinmueller88</a>
+    </div>`,
+  },
+  {
+    id: "agents-vs-chat-vs-rag",
+    section: "Wrap-up",
+    title: "Agents vs Chatbots vs RAG",
+    subtitle: "Different paradigms",
+    layout: "three-column",
+    cols: [
+      {
+        title: "Chatbot",
+        bullets: ["Single turn (mostly)", "No tools", "Stateless", "Simple orchestration", "Ex: customer FAQ bot, ChatGPT without tools"],
+      },
+      {
+        title: "RAG",
+        bullets: ["Retrieval-Augmented Generation", "No tools (doc retrieval only)", "Stateless", "Fixed retrieval flow", "Ex: search over company docs, Notion AI"],
+      },
+      {
+        title: "Agent",
+        bullets: ["Multi-turn, loops", "Tools + external actions", "Stateful (memory)", "Autonomous decisions", "Ex: Cursor, Claude Code, ai-secure.dev"],
+      },
+    ],
   },
 ];
