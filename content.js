@@ -388,6 +388,9 @@ npx skills install seo-audit
     title: "ai-secure.dev",
     subtitle: "AI agent in production — a practical example",
     layout: "title",
+    html: `<div style="margin-top:1.5rem;display:flex;justify-content:center">
+      <img src="pics/ai-secure-landing.png" alt="ai-secure.dev landing page" style="max-width:600px;width:100%;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.12)" />
+    </div>`,
   },
   {
     id: "problem-product",
@@ -439,6 +442,9 @@ npx skills install seo-audit
       <path d="M310 40 L335 40" stroke="#64748b" stroke-width="2" marker-end="url(#flow-arr)"/>
       <defs><marker id="flow-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"/></marker></defs>
     </svg>`,
+    html: `<div style="margin-top:1rem;display:flex;justify-content:center">
+      <img src="pics/ai-secure-report.png" alt="ai-secure report" style="max-width:500px;width:100%;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.12)" />
+    </div>`,
     layout: "diagram",
   },
   {
@@ -588,18 +594,6 @@ npx skills install seo-audit
   },
 
   // --- Part 4: Wrap-up ---
-  {
-    id: "takeaways",
-    section: "Wrap-up",
-    title: "Key Takeaways",
-    bullets: [
-      "Agents = LLM + tools + memory + control loop",
-      "ai-secure: concrete example of agent in production",
-      "MCP, sub-agents, skills extend capability",
-      "Production = reliability + observability + cost",
-    ],
-    layout: "default",
-  },
   {
     id: "resources",
     section: "Wrap-up",

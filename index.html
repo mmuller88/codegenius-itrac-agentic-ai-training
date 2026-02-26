@@ -193,6 +193,7 @@
           if (slide.bullets && slide.bullets.length) {
             html += `<ul>${slide.bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>`;
           }
+          if (slide.html) html += slide.html;
         } else if (layout === 'three-column' && slide.cols) {
           html += `<h1>${esc(slide.title)}</h1>`;
           if (slide.subtitle) html += `<p style="color:var(--muted)">${esc(slide.subtitle)}</p>`;
