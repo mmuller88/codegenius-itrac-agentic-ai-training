@@ -1,6 +1,7 @@
 /**
  * Beyond Chatbots: Shipping Stateful AI Agents on AWS
  * Slide content - 30 min presentation + 15 min Q&A
+ * AI agent concepts + ai-secure.dev practical example + production patterns
  */
 const SLIDES = [
   // --- Part 1: AI Agent Concepts ---
@@ -21,11 +22,40 @@ const SLIDES = [
     title: "Agenda",
     bullets: [
       "AI Agent Concepts — LLM, tools, memory, control loop, MCP, sub-agents, skills",
-      "Why Infrastructure Matters — the prototype-to-production gap",
-      "AWS Bedrock AgentCore — Fargate for agents, ai-secure.dev walkthrough",
-      "Hard Lessons & Economics — Docker parity, error handling, IaC, cost optimization",
+      "ai-secure.dev — problem, user flow, architecture, toolbox, local to cloud",
+      "Production Patterns — challenges, cost, reliability",
       "Q&A",
     ],
+    layout: "default",
+  },
+  {
+    id: "why-agent-concepts",
+    section: "AI Agent Concepts",
+    title: "Why AI Agent Concepts Matter",
+    subtitle: "Frameworks come and go — concepts stay",
+    bullets: [
+      "Many agent builder frameworks & tools exist — new ones every month",
+      "Concepts (loops, tools, memory, MCP) are universal across all of them",
+      "Understanding the fundamentals lets you evaluate & switch frameworks confidently",
+    ],
+    html: `<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;margin-top:1.5rem">
+      <div style="text-align:center">
+        <img src="crewai-logo.png" alt="CrewAI" style="width:90px;height:90px;border-radius:12px;object-fit:contain" />
+        <div style="margin-top:0.4rem;font-size:14px;font-weight:600;color:#374151">CrewAI</div>
+      </div>
+      <div style="text-align:center">
+        <img src="n8n-logo.png" alt="n8n" style="width:90px;height:90px;border-radius:12px;object-fit:contain" />
+        <div style="margin-top:0.4rem;font-size:14px;font-weight:600;color:#374151">n8n</div>
+      </div>
+      <div style="text-align:center">
+        <img src="openclaw-logo.png" alt="OpenClaw" style="width:90px;height:90px;border-radius:12px;object-fit:contain" />
+        <div style="margin-top:0.4rem;font-size:14px;font-weight:600;color:#374151">OpenClaw</div>
+      </div>
+      <div style="text-align:center">
+        <img src="https://www.awsicon.com/static/images/Service-Icons/Artificial-Intelligence/48/svg/Bedrock.svg" alt="AWS AgentCore" style="width:90px;height:90px;object-fit:contain" />
+        <div style="margin-top:0.4rem;font-size:14px;font-weight:600;color:#374151">AWS AgentCore</div>
+      </div>
+    </div>`,
     layout: "default",
   },
   {
@@ -150,26 +180,30 @@ const SLIDES = [
     id: "mcp",
     section: "AI Agent Concepts",
     title: "MCP — Model Context Protocol",
-    subtitle: "Universal tool interface built on JSON-RPC 2.0",
+    subtitle: "Make your enterprise APIs AI-ready",
     bullets: [
-      "Open protocol — any host can talk to any MCP server",
+      "Created by Anthropic, Nov 2024 — open-sourced from day one",
+      "Wrap any REST/GraphQL/SaaS API as MCP server → AI agents can use it",
       "Transport: stdio (local) or HTTP+SSE (remote)",
       "JSON-RPC 2.0 messages: method + params → result",
-      "Servers expose tools, resources, prompts",
+      "I can help build MCP servers for your APIs — done it several times",
     ],
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 50" class="w-full max-w-lg mx-auto">
-      <rect x="10" y="8" width="80" height="34" rx="5" fill="#f59e0b" fill-opacity="0.15" stroke="#d97706" stroke-width="1.5"/>
-      <text x="50" y="30" text-anchor="middle" fill="#b45309" font-size="11" font-weight="600">Host App</text>
-      <rect x="120" y="8" width="90" height="34" rx="5" fill="#2563eb" fill-opacity="0.15" stroke="#2563eb" stroke-width="1.5"/>
-      <text x="165" y="30" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">MCP Client</text>
-      <rect x="250" y="8" width="90" height="34" rx="5" fill="#2563eb" fill-opacity="0.15" stroke="#2563eb" stroke-width="1.5"/>
-      <text x="295" y="30" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">MCP Server</text>
-      <rect x="370" y="8" width="80" height="34" rx="5" fill="#059669" fill-opacity="0.15" stroke="#059669" stroke-width="1.5"/>
-      <text x="410" y="30" text-anchor="middle" fill="#047857" font-size="11" font-weight="600">Tools</text>
-      <path d="M90 25 L115 25" stroke="#64748b" stroke-width="1.5" marker-end="url(#mcp-arr)"/>
-      <path d="M210 25 L245 25" stroke="#64748b" stroke-width="1.5" marker-end="url(#mcp-arr)"/>
-      <text x="228" y="5" text-anchor="middle" fill="#6b7280" font-size="8">JSON-RPC</text>
-      <path d="M340 25 L365 25" stroke="#64748b" stroke-width="1.5" marker-end="url(#mcp-arr)"/>
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 100" class="w-full max-w-2xl mx-auto">
+      <rect x="10" y="30" width="80" height="40" rx="5" fill="#f59e0b" fill-opacity="0.15" stroke="#d97706" stroke-width="1.5"/>
+      <text x="50" y="55" text-anchor="middle" fill="#b45309" font-size="11" font-weight="600">AI Agent</text>
+      <rect x="120" y="30" width="90" height="40" rx="5" fill="#2563eb" fill-opacity="0.15" stroke="#2563eb" stroke-width="1.5"/>
+      <text x="165" y="55" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">MCP Client</text>
+      <rect x="250" y="30" width="90" height="40" rx="5" fill="#2563eb" fill-opacity="0.15" stroke="#2563eb" stroke-width="1.5"/>
+      <text x="295" y="55" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">MCP Server</text>
+      <rect x="380" y="8" width="130" height="84" rx="5" fill="#059669" fill-opacity="0.1" stroke="#059669" stroke-width="1.5"/>
+      <text x="445" y="28" text-anchor="middle" fill="#047857" font-size="10" font-weight="700">Enterprise APIs</text>
+      <text x="445" y="46" text-anchor="middle" fill="#047857" font-size="9">Stripe · Jira · SAP</text>
+      <text x="445" y="60" text-anchor="middle" fill="#047857" font-size="9">Salesforce · Slack</text>
+      <text x="445" y="74" text-anchor="middle" fill="#047857" font-size="9">Your internal APIs</text>
+      <path d="M90 50 L115 50" stroke="#64748b" stroke-width="1.5" marker-end="url(#mcp-arr)"/>
+      <path d="M210 50 L245 50" stroke="#64748b" stroke-width="1.5" marker-end="url(#mcp-arr)"/>
+      <text x="228" y="25" text-anchor="middle" fill="#6b7280" font-size="8">JSON-RPC</text>
+      <path d="M340 50 L375 50" stroke="#64748b" stroke-width="1.5" marker-end="url(#mcp-arr)"/>
       <defs><marker id="mcp-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"/></marker></defs>
     </svg>`,
     layout: "diagram",
@@ -332,7 +366,6 @@ npx skills install seo-audit
           "Conversation context (recent messages)",
           "Stored in-memory / session",
           "Lost when session ends",
-          "AgentCore: built-in memory API",
         ],
       },
       {
@@ -348,252 +381,222 @@ npx skills install seo-audit
     ],
   },
 
-  // --- Part 2: Why Infrastructure Matters ---
+  // --- Part 2: ai-secure.dev — Practical Example ---
   {
-    id: "section-infra",
-    section: "Why Infrastructure Matters",
-    title: "Why Infrastructure Matters",
-    subtitle: "Prototype → Production gap",
-    layout: "title",
-  },
-  {
-    id: "production-gap",
-    section: "Why Infrastructure Matters",
-    title: "The Production Gap",
-    subtitle: "Prototype vs production",
-    layout: "two-column",
-    cols: [
-      {
-        title: "Prototype",
-        bullets: ["Local Jupyter / script", "Single user", "No scaling", "Manual tool runs"],
-      },
-      {
-        title: "Production",
-        bullets: ["Multi-tenant, concurrent users", "State isolation", "Browser runtime (Chromium)", "Tool orchestration, retries", "Networking (VPC, NAT)", "Reliability, observability"],
-      },
-    ],
-  },
-  {
-    id: "core-challenges",
-    section: "Why Infrastructure Matters",
-    title: "Core Production Challenges",
-    bullets: [
-      "State — session isolation, conversation memory",
-      "Tool orchestration — sequencing, retries, timeouts",
-      "Browser runtime — Chromium infra, scaling",
-      "Networking — VPC, outbound to APIs & target sites",
-      "Scaling — concurrency, cold starts",
-      "Reliability — logging, tracing, debugging",
-    ],
-    layout: "default",
-  },
-
-  // --- Part 3: AWS Bedrock AgentCore ---
-  {
-    id: "section-agentcore",
-    section: "AWS Bedrock AgentCore",
-    title: "AWS Bedrock AgentCore",
-    subtitle: "Fargate for AI agents",
-    layout: "title",
-  },
-  {
-    id: "fargate-mental-model",
-    section: "AWS Bedrock AgentCore",
-    title: "Fargate for Agents",
-    subtitle: "You bring container, AWS handles the rest",
-    bullets: [
-      "Package agent as Docker image → push ECR",
-      "AWS handles scaling, networking, runtime",
-      "Same mental model as ECS Fargate",
-    ],
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 160" class="w-full max-w-md mx-auto">
-      <rect x="20" y="50" width="100" height="60" rx="8" fill="#f59e0b" fill-opacity="0.2" stroke="#d97706" stroke-width="2"/>
-      <text x="70" y="80" text-anchor="middle" fill="#b45309" font-size="12" font-weight="600">Your Container</text>
-      <text x="70" y="95" text-anchor="middle" fill="#64748b" font-size="10">(agent + tools)</text>
-      <rect x="140" y="20" width="160" height="120" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
-      <text x="220" y="45" text-anchor="middle" fill="#0369a1" font-size="11" font-weight="600">AWS Managed</text>
-      <text x="220" y="65" text-anchor="middle" fill="#64748b" font-size="10">Scaling · VPC · Browser · Memory · SSE</text>
-      <path d="M120 80 L135 80" stroke="#64748b" stroke-width="2" marker-end="url(#ac-arr)"/>
-      <defs><marker id="ac-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"/></marker></defs>
-    </svg>`,
-    layout: "diagram",
-  },
-  {
-    id: "agentcore-features",
-    section: "AWS Bedrock AgentCore",
-    title: "AgentCore Features",
-    bullets: [
-      "Container-based — same image runs locally & cloud",
-      "VPC networking — private subnets, NAT for outbound",
-      "AgentCore Browser — managed Chromium, no Playwright infra",
-      "Memory — built-in conversation memory across sessions",
-      "Streaming — SSE for real-time progress",
-    ],
-    layout: "default",
-  },
-  {
-    id: "agentcore-browser",
-    section: "AWS Bedrock AgentCore",
-    title: "AgentCore Browser",
-    subtitle: "Managed Chromium",
-    layout: "two-column",
-    cols: [
-      {
-        title: "Before",
-        bullets: ["Manage Playwright/Puppeteer", "Docker, scaling, isolation", "Custom infra"],
-      },
-      {
-        title: "After",
-        bullets: ["AgentCore Browser", "Managed Chromium", "No browser infra to run"],
-      },
-    ],
-  },
-  {
-    id: "ai-secure-what",
-    section: "AWS Bedrock AgentCore",
+    id: "section-aisecure",
+    section: "ai-secure.dev",
     title: "ai-secure.dev",
-    subtitle: "What it does",
+    subtitle: "AI agent in production — a practical example",
+    layout: "title",
+  },
+  {
+    id: "problem-product",
+    section: "ai-secure.dev",
+    title: "Problem → Product",
+    layout: "two-column",
+    cols: [
+      {
+        title: "Problem",
+        bullets: [
+          "Compliance audits: slow, manual, inconsistent",
+          "Need evidence: screenshots, settings pages, headers, DNS",
+          "Many pages behind login (auth flows)",
+        ],
+      },
+      {
+        title: "Product",
+        bullets: [
+          "ai-secure: AI browser agent that audits websites",
+          "Active browsing — not a passive scanner",
+          "Can login, navigate, capture evidence",
+          "Produces compliance audit report (ISO 27001, NIST, SOC2)",
+        ],
+      },
+    ],
+  },
+  {
+    id: "aisecure-flow",
+    section: "ai-secure.dev",
+    title: "ai-secure — User Flow",
+    subtitle: "Submit → browse → report",
     bullets: [
       "1. User submits URL + framework (ISO 27001, NIST, SOC2, COBIT)",
-      "2. Agent navigates site via AgentCore Browser, live progress",
+      "2. Agent navigates site via browser — live progress streamed",
       "3. Scan completes, summary shown",
       "4. Detailed report: findings + recommendations",
     ],
-    layout: "default",
-  },
-  {
-    id: "ai-secure-arch",
-    section: "AWS Bedrock AgentCore",
-    title: "ai-secure.dev — Architecture",
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 220" class="w-full max-w-lg mx-auto">
-      <rect x="20" y="20" width="100" height="50" rx="6" fill="#2563eb" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/>
-      <text x="70" y="50" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Frontend</text>
-      <text x="70" y="65" text-anchor="middle" fill="#64748b" font-size="9">Next.js</text>
-      <rect x="150" y="50" width="120" height="70" rx="6" fill="#f59e0b" fill-opacity="0.2" stroke="#d97706" stroke-width="2"/>
-      <text x="210" y="80" text-anchor="middle" fill="#b45309" font-size="11" font-weight="600">AgentCore Runtime</text>
-      <text x="210" y="95" text-anchor="middle" fill="#64748b" font-size="9">your container</text>
-      <rect x="150" y="140" width="120" height="50" rx="6" fill="#059669" fill-opacity="0.2" stroke="#059669" stroke-width="2"/>
-      <text x="210" y="170" text-anchor="middle" fill="#047857" font-size="10" font-weight="600">Claude</text>
-      <rect x="300" y="70" width="80" height="50" rx="6" fill="#0284c7" fill-opacity="0.2" stroke="#0284c7" stroke-width="2"/>
-      <text x="340" y="95" text-anchor="middle" fill="#0369a1" font-size="10" font-weight="600">Browser</text>
-      <path d="M120 45 L145 75" stroke="#64748b" stroke-width="2" marker-end="url(#arch-arr)"/>
-      <path d="M210 120 L210 135" stroke="#64748b" stroke-width="2" marker-end="url(#arch-arr)"/>
-      <path d="M270 95 L295 95" stroke="#64748b" stroke-width="2" marker-end="url(#arch-arr)"/>
-      <defs><marker id="arch-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"/></marker></defs>
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 80" class="w-full max-w-lg mx-auto">
+      <rect x="10" y="15" width="80" height="50" rx="6" fill="#2563eb" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/>
+      <text x="50" y="45" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Submit URL</text>
+      <rect x="120" y="15" width="80" height="50" rx="6" fill="#059669" fill-opacity="0.2" stroke="#059669" stroke-width="2"/>
+      <text x="160" y="45" text-anchor="middle" fill="#047857" font-size="11" font-weight="600">Browse</text>
+      <rect x="230" y="15" width="80" height="50" rx="6" fill="#059669" fill-opacity="0.2" stroke="#059669" stroke-width="2"/>
+      <text x="270" y="45" text-anchor="middle" fill="#047857" font-size="11" font-weight="600">Analyze</text>
+      <rect x="340" y="15" width="80" height="50" rx="6" fill="#2563eb" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/>
+      <text x="380" y="45" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Report</text>
+      <path d="M90 40 L115 40" stroke="#64748b" stroke-width="2" marker-end="url(#flow-arr)"/>
+      <path d="M200 40 L225 40" stroke="#64748b" stroke-width="2" marker-end="url(#flow-arr)"/>
+      <path d="M310 40 L335 40" stroke="#64748b" stroke-width="2" marker-end="url(#flow-arr)"/>
+      <defs><marker id="flow-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"/></marker></defs>
     </svg>`,
     layout: "diagram",
   },
   {
-    id: "ai-secure-tools",
-    section: "AWS Bedrock AgentCore",
-    title: "ai-secure.dev — Tool Belt",
+    id: "aisecure-arch",
+    section: "ai-secure.dev",
+    title: "ai-secure — Architecture",
+    subtitle: "Three parts",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 200" class="w-full max-w-lg mx-auto">
+      <rect x="10" y="20" width="110" height="60" rx="6" fill="#2563eb" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/>
+      <text x="65" y="48" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="600">Frontend</text>
+      <text x="65" y="65" text-anchor="middle" fill="#64748b" font-size="10">Next.js dashboard</text>
+      <rect x="155" y="20" width="130" height="60" rx="6" fill="#f59e0b" fill-opacity="0.2" stroke="#d97706" stroke-width="2"/>
+      <text x="220" y="48" text-anchor="middle" fill="#b45309" font-size="12" font-weight="600">Agent</text>
+      <text x="220" y="65" text-anchor="middle" fill="#64748b" font-size="10">Strands + tools</text>
+      <rect x="320" y="20" width="90" height="60" rx="6" fill="#0284c7" fill-opacity="0.2" stroke="#0284c7" stroke-width="2"/>
+      <text x="365" y="48" text-anchor="middle" fill="#0369a1" font-size="12" font-weight="600">Browser</text>
+      <text x="365" y="65" text-anchor="middle" fill="#64748b" font-size="10">Chromium</text>
+      <rect x="155" y="120" width="130" height="60" rx="6" fill="#059669" fill-opacity="0.2" stroke="#059669" stroke-width="2"/>
+      <text x="220" y="148" text-anchor="middle" fill="#047857" font-size="12" font-weight="600">LLM</text>
+      <text x="220" y="165" text-anchor="middle" fill="#64748b" font-size="10">Claude via Bedrock</text>
+      <path d="M120 50 L150 50" stroke="#64748b" stroke-width="2" marker-end="url(#arch2-arr)"/>
+      <path d="M285 50 L315 50" stroke="#64748b" stroke-width="2" marker-end="url(#arch2-arr)"/>
+      <path d="M220 80 L220 115" stroke="#64748b" stroke-width="2" marker-end="url(#arch2-arr)"/>
+      <defs><marker id="arch2-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"/></marker></defs>
+    </svg>`,
     bullets: [
-      "browser_navigate, browser_snapshot, browser_click, browser_type",
-      "http_security_check — headers, TLS, redirects",
-      "dns_lookup — SPF/DMARC/CAA",
-      "totp — 2FA for authenticated scans",
-      "issue_tracker — tracks problems",
+      "Frontend: dashboard — scan status, reports, admin",
+      "Agent: LLM chooses which tool when — autonomous decisions",
+      "Infra: Cognito auth, DynamoDB storage, AgentCore runtime",
     ],
-    layout: "default",
+    layout: "diagram",
+  },
+  {
+    id: "aisecure-toolbox",
+    section: "ai-secure.dev",
+    title: "ai-secure — Agent Toolbox",
+    subtitle: "What the agent can do",
+    layout: "two-column",
+    cols: [
+      {
+        title: "Browser capabilities",
+        bullets: [
+          "Navigate, snapshot, click, type",
+          "Capture screenshots as evidence",
+          "Handle login flows autonomously",
+        ],
+      },
+      {
+        title: "Security capabilities",
+        bullets: [
+          "HTTP headers, TLS, redirect chains",
+          "DNS records — SPF, DMARC, CAA",
+          "TOTP generation for 2FA",
+          "Issue tracking, streaming progress",
+        ],
+      },
+    ],
+  },
+  {
+    id: "aisecure-local-cloud",
+    section: "ai-secure.dev",
+    title: "ai-secure — Local → Cloud",
+    subtitle: "One container, two environments",
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" class="w-full max-w-2xl mx-auto">
+      <!-- Local box -->
+      <rect x="10" y="10" width="200" height="120" rx="8" fill="#2563eb" fill-opacity="0.08" stroke="#2563eb" stroke-width="2"/>
+      <text x="110" y="35" text-anchor="middle" fill="#1e40af" font-size="13" font-weight="700">Local dev</text>
+      <text x="110" y="58" text-anchor="middle" fill="#64748b" font-size="10">Docker Compose</text>
+      <text x="110" y="75" text-anchor="middle" fill="#64748b" font-size="10">Playwright MCP + noVNC</text>
+      <text x="110" y="92" text-anchor="middle" fill="#64748b" font-size="10">Watch browser in real-time</text>
+      <text x="110" y="118" text-anchor="middle" fill="#1e40af" font-size="10" font-weight="600">Fast iteration loop</text>
+      <!-- Arrow -->
+      <path d="M215 70 L295 70" stroke="#64748b" stroke-width="2" marker-end="url(#lc-arr)"/>
+      <text x="255" y="62" text-anchor="middle" fill="#64748b" font-size="10" font-weight="600">same image</text>
+      <!-- Cloud box -->
+      <rect x="300" y="10" width="210" height="120" rx="8" fill="#f59e0b" fill-opacity="0.08" stroke="#d97706" stroke-width="2"/>
+      <text x="405" y="35" text-anchor="middle" fill="#b45309" font-size="13" font-weight="700">AWS AgentCore</text>
+      <image href="https://www.awsicon.com/static/images/Service-Icons/Artificial-Intelligence/48/svg/Bedrock.svg" x="310" y="48" width="36" height="36"/>
+      <text x="430" y="62" text-anchor="middle" fill="#64748b" font-size="10">Managed runtime</text>
+      <text x="430" y="79" text-anchor="middle" fill="#64748b" font-size="10">Managed browser</text>
+      <text x="405" y="118" text-anchor="middle" fill="#b45309" font-size="10" font-weight="600">Scaling + networking by AWS</text>
+      <defs><marker id="lc-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"/></marker></defs>
+    </svg>`,
+    bullets: [
+      "One container image — runs identical locally and in the cloud",
+      "Local: Docker Compose for fast dev with live browser view",
+      "Cloud: AWS Bedrock AgentCore handles runtime, browser, scaling",
+    ],
+    layout: "diagram",
   },
 
-  // --- Part 4: Hard Lessons & Economics ---
+  // --- Part 3: Production Patterns ---
   {
-    id: "section-lessons",
-    section: "Hard Lessons & Economics",
-    title: "Hard Lessons & Economics",
+    id: "section-production",
+    section: "Production Patterns",
+    title: "Production Patterns",
+    subtitle: "What it takes to ship an agent",
     layout: "title",
   },
   {
-    id: "local-first",
-    section: "Hard Lessons & Economics",
-    title: "Local-First",
-    subtitle: "Same Docker container everywhere",
+    id: "production-challenges",
+    section: "Production Patterns",
+    title: "Production Challenges",
+    subtitle: "ai-secure as example",
     bullets: [
-      "Develop locally with Docker",
-      "Same container runs in AgentCore",
-      "Local: playwright-mcp Docker image",
-      "Cloud: AgentCore Browser",
-      "Parity = faster iteration",
+      "State isolation — multi-tenant scans running concurrently",
+      "Tool orchestration — retries, timeouts, sequencing",
+      "Browser runtime — local Chromium → managed AgentCore Browser",
+      "Reliability — logging, tracing, debugging agent decisions",
     ],
     layout: "default",
   },
   {
-    id: "browser-error-handling",
-    section: "Hard Lessons & Economics",
-    title: "Browser Error Handling",
-    bullets: [
-      "Pages don't always load",
-      "Elements move, selectors break",
-      "Auth flows vary (login, 2FA)",
-      "Design tools for retries & fallbacks",
-    ],
-    layout: "default",
-  },
-  {
-    id: "logging-gotcha",
-    section: "Hard Lessons & Economics",
-    title: "Logging Gotcha",
-    subtitle: "AgentCore logs ≠ app logs",
-    bullets: ["AgentCore has its own logs", "Use CloudWatch SDK for app logging", "Otherwise you won't see your logs"],
-    code: {
-      lang: "typescript",
-      text: `import {
-  CloudWatchLogsClient,
-  PutLogEventsCommand
-} from '@aws-sdk/client-cloudwatch-logs';
-
-await logs.send(
-  new PutLogEventsCommand({ ... })
-);`,
-    },
+    id: "cost-reliability",
+    section: "Production Patterns",
+    title: "Cost + Reliability Knobs",
     layout: "two-column",
-  },
-  {
-    id: "iac-cdk",
-    section: "Hard Lessons & Economics",
-    title: "IaC via CDK",
-    subtitle: "Deploy agent like any infra",
-    code: {
-      lang: "typescript",
-      text: `// Package agent as Docker image, push ECR
-// Deploy via CDK to AgentCore Runtime
-const agentCore = new AgentCoreRuntime(this, 'Agent', {
-  image: ecrImage,
-  vpc,
-});`,
-    },
-    layout: "default",
-  },
-  {
-    id: "cost-optimization",
-    section: "Hard Lessons & Economics",
-    title: "Cost Optimization",
-    bullets: [
-      "Model routing: Haiku (~10× cheaper) for simple, Sonnet for complex",
-      "Message caching: ~90% cost reduction on repeated context",
-      "Disable extended thinking when not needed (~$0.15/call)",
+    cols: [
+      {
+        title: "Cost",
+        bullets: [
+          "Model routing: cheap model for simple steps",
+          "Caching: repeated context cost reduction",
+          "Disable extended thinking when not needed",
+        ],
+      },
+      {
+        title: "Reliability",
+        bullets: [
+          "Retries & backoff for rate limits",
+          "Tool error handling — graceful degradation",
+          "Streaming so users see progress in real-time",
+        ],
+      },
     ],
-    code: {
-      lang: "typescript",
-      text: `const model = complexity === 'simple'
-  ? 'claude-haiku-4-5'
-  : 'claude-sonnet-4-5';`,
-    },
-    layout: "two-column",
+  },
+  {
+    id: "production-takeaway",
+    section: "Production Patterns",
+    title: "Production Takeaway",
+    bullets: [
+      "ai-secure = agent + tools + infra + reliability",
+      "Same patterns apply to any agent product",
+      "Framework matters less than tool design and error handling",
+    ],
+    layout: "default",
   },
 
-  // --- Part 5: Wrap-up ---
+  // --- Part 4: Wrap-up ---
   {
     id: "takeaways",
     section: "Wrap-up",
     title: "Key Takeaways",
     bullets: [
       "Agents = LLM + tools + memory + control loop",
+      "ai-secure: concrete example of agent in production",
       "MCP, sub-agents, skills extend capability",
-      "Infrastructure matters — state, browser, scaling",
-      "AgentCore = Fargate for agents — container, VPC, browser, memory, SSE",
-      "Local-first Docker parity, good error handling, IaC, cost routing",
+      "Production = reliability + observability + cost",
     ],
     layout: "default",
   },
@@ -602,9 +605,10 @@ const agentCore = new AgentCoreRuntime(this, 'Agent', {
     section: "Wrap-up",
     title: "Resources",
     bullets: [
-      "Blog: martinmueller.dev",
       "ai-secure.dev — security compliance scanner",
+      "Blog: martinmueller.dev",
       "LinkedIn: linkedin.com/in/martinmueller88",
+      "MCP spec: modelcontextprotocol.io",
     ],
     layout: "default",
   },

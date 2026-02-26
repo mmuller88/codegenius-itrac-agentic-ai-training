@@ -112,6 +112,12 @@
       .title-slide { text-align: center; padding-top: 3rem; }
       .title-slide h1 { font-size: 48px; }
       .title-slide h2 { font-weight: 600; margin-top: 0.4rem; }
+      .slide-num {
+        position: absolute; top: 0.5rem; right: 0.5rem;
+        color: var(--muted); font-size: 13px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      section.slide { position: relative; }
       @media print {
         header.site, .footer-nav { display: none; }
         section.slide { display: block !important; page-break-after: always; }
@@ -129,7 +135,7 @@
         <div class="social" aria-label="Social">
           <a href="https://martinmueller.dev" target="_blank" rel="noopener">MM</a>
           <a href="https://ai-secure.dev" target="_blank" rel="noopener">AS</a>
-          <a href="https://docs.aws.amazon.com/bedrock-agentcore/" target="_blank" rel="noopener">AWS</a>
+          <a href="https://linkedin.com/in/martinmueller88" target="_blank" rel="noopener">LI</a>
         </div>
       </div>
     </header>
@@ -237,8 +243,11 @@
             html += `<div class="code" style="margin-top:1rem"><pre><code class="language-${slide.code.lang || 'typescript'}">${esc(slide.code.text)}</code></pre></div>`;
           }
           if (slide.svg) html += slide.svg;
+          if (slide.html) html += slide.html;
         }
 
+        const total = typeof SLIDES !== 'undefined' ? SLIDES.length : '?';
+        html += `<span class="slide-num">${idx + 1} / ${total}</span>`;
         sec.innerHTML = html;
         deck.appendChild(sec);
       }
