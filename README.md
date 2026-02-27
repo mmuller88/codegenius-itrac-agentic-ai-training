@@ -10,12 +10,21 @@ npm run serve
 
 Open http://localhost:53542. Use arrow keys to navigate.
 
+## Build Standalone HTML
+
+```bash
+node build-standalone.js
+```
+
+Produces `presentation-standalone.html` (~3 MB) with all images base64-embedded and highlight.js inlined. Zero external dependencies — share as a single file.
+
 ## Structure
 
 | File | Purpose |
 |------|---------|
 | `index.html` | Presentation engine — slide renderer, navigation |
 | `content.js` | Slide data — titles, bullets, code, SVGs. Edit slides here |
+| `build-standalone.js` | Builds self-contained HTML with embedded assets |
 
 Content and view are separated: change wording in `content.js`; adjust layout/styling in `index.html`.
 
