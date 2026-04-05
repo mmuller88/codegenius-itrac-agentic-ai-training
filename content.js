@@ -63,27 +63,17 @@ const SLIDES = [
     id: "what-is-agent",
     section: "AI Agent Concepts",
     title: "What is an AI Agent?",
-    subtitle: "More than a chatbot",
+    subtitle: "More than a chatbot — it's a digital human",
     bullets: [
-      "LLM — reasoning & generation",
-      "Tools — call functions, APIs, browse",
-      "Memory — short-term (conversation) + long-term (persistent)",
-      "Control Loop — observe → reason → act",
+      "🧠 LLM (Brain) — reasoning & generation",
+      "👁️ Sensors (Eyes) — perceive environment, user input, tool results",
+      "🖐️ Tools (Hands) — call functions, APIs, browse, write code",
+      "💓 Heartbeat — periodic scheduled pulse for autonomous tasks",
+      "🔄 Control Loop — perceive → think → act → observe → repeat",
     ],
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 120" class="w-full max-w-lg mx-auto">
-      <rect x="10" y="30" width="90" height="55" rx="8" fill="#2563eb" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/>
-      <text x="55" y="62" text-anchor="middle" fill="#1e40af" font-size="14" font-weight="600">LLM</text>
-      <rect x="125" y="30" width="90" height="55" rx="8" fill="#2563eb" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/>
-      <text x="170" y="62" text-anchor="middle" fill="#1e40af" font-size="14" font-weight="600">Tools</text>
-      <rect x="240" y="30" width="90" height="55" rx="8" fill="#2563eb" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/>
-      <text x="285" y="62" text-anchor="middle" fill="#1e40af" font-size="14" font-weight="600">Memory</text>
-      <rect x="355" y="30" width="90" height="55" rx="8" fill="#2563eb" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/>
-      <text x="400" y="62" text-anchor="middle" fill="#1e40af" font-size="14" font-weight="600">Loop</text>
-      <path d="M100 57 L120 57" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-what)"/>
-      <path d="M215 57 L235 57" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-what)"/>
-      <path d="M330 57 L350 57" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-what)"/>
-      <defs><marker id="arrow-what" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"/></marker></defs>
-    </svg>`,
+    html: `<div style="display:flex;justify-content:center;margin-top:1.5rem">
+      <img src="pics/combined3_split.png" alt="AI Agent as Human - Body parts mapped to agent concepts" style="max-height:340px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1)" />
+    </div>`,
     layout: "diagram",
   },
   {
@@ -108,6 +98,36 @@ const SLIDES = [
       <path d="M205 50 L220 50" stroke="#64748b" stroke-width="2" marker-end="url(#arr-loop)"/>
       <path d="M267 70 L267 85 L52 85 L52 70" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arr-loop)" stroke-dasharray="4 2"/>
       <defs><marker id="arr-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"/></marker></defs>
+    </svg>`,
+    layout: "diagram",
+  },
+  {
+    id: "heartbeat",
+    section: "AI Agent Concepts",
+    title: "The Heartbeat",
+    subtitle: "Giving agents a pulse — pioneered by OpenClaw",
+    bullets: [
+      "Periodic scheduled poll (e.g. every 30 min) that wakes the agent",
+      "Agent checks: new emails? calendar events? GitHub issues? weather?",
+      "If nothing needs attention → silent heartbeat (no token waste)",
+      "If something important → agent proactively reaches out to user",
+      "Like a human checking their phone periodically — but never forgets",
+      "Combines with Cron for exact-time tasks (9:00 AM reminders, daily reports)",
+    ],
+    svg: `<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 520 160\" class=\"w-full max-w-2xl mx-auto\">
+      <!-- Heartbeat ECG line -->
+      <path d=\"M20 80 L80 80 L100 80 L115 30 L130 130 L145 30 L160 130 L175 80 L240 80 L260 80 L275 30 L290 130 L305 30 L320 130 L335 80 L400 80 L420 80 L435 30 L450 130 L465 30 L480 130 L495 80 L510 80\" stroke=\"#ef4444\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>
+      <!-- Time labels -->
+      <text x=\"100\" y=\"155\" text-anchor=\"middle\" fill=\"#6b7280\" font-size=\"11\">t=0 min</text>
+      <text x=\"260\" y=\"155\" text-anchor=\"middle\" fill=\"#6b7280\" font-size=\"11\">t=30 min</text>
+      <text x=\"420\" y=\"155\" text-anchor=\"middle\" fill=\"#6b7280\" font-size=\"11\">t=60 min</text>
+      <!-- Action bubbles -->
+      <rect x=\"60\" y=\"2\" width=\"80\" height=\"20\" rx=\"10\" fill=\"#dbeafe\" stroke=\"#2563eb\" stroke-width=\"1\"/>
+      <text x=\"100\" y=\"16\" text-anchor=\"middle\" fill=\"#1e40af\" font-size=\"9\" font-weight=\"600\">📧 Check email</text>
+      <rect x=\"220\" y=\"2\" width=\"80\" height=\"20\" rx=\"10\" fill=\"#dcfce7\" stroke=\"#059669\" stroke-width=\"1\"/>
+      <text x=\"260\" y=\"16\" text-anchor=\"middle\" fill=\"#047857\" font-size=\"9\" font-weight=\"600\">📅 Calendar</text>
+      <rect x=\"380\" y=\"2\" width=\"80\" height=\"20\" rx=\"10\" fill=\"#fef3c7\" stroke=\"#d97706\" stroke-width=\"1\"/>
+      <text x=\"420\" y=\"16\" text-anchor=\"middle\" fill=\"#b45309\" font-size=\"9\" font-weight=\"600\">🐛 GH Issues</text>
     </svg>`,
     layout: "diagram",
   },
