@@ -416,6 +416,10 @@ npx skills install seo-audit
       "Collections: projects, decisions, contacts, learnings",
       "MCP-ready: any agent framework can plug in via Model Context Protocol",
     ],
+    html: `<div style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;margin-top:1rem">
+      <img src="pics/peachbase-global-brain.png" alt="PeachBase Global Brain" style="max-height:240px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1)" />
+      <a href="https://martinmueller.dev/peachbase-global-brain/" target="_blank" rel="noopener" style="font-size:14px;color:#6d28d9">📝 Blog: My Global Brain with PeachBase</a>
+    </div>`,
     svg: `<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 520 140\" class=\"w-full max-w-2xl mx-auto\">
       <!-- Central brain -->
       <rect x=\"190\" y=\"30\" width=\"140\" height=\"55\" rx=\"12\" fill=\"#8b5cf6\" fill-opacity=\"0.15\" stroke=\"#8b5cf6\" stroke-width=\"2\"/>
