@@ -72,7 +72,7 @@ const SLIDES = [
       "🔄 Control Loop — perceive → think → act → observe → repeat",
     ],
     html: `<div style="display:flex;justify-content:center;margin-top:1.5rem">
-      <img src="pics/combined3_split.png" alt="AI Agent as Human - Body parts mapped to agent concepts" style="max-height:340px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1)" />
+      <img src="pics/combined3_split.jpg" alt="AI Agent as Human - Body parts mapped to agent concepts" style="max-height:340px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1)" />
     </div>`,
     layout: "diagram",
   },
