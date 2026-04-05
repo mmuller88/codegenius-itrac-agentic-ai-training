@@ -403,6 +403,54 @@ npx skills install seo-audit
     ],
   },
 
+  {
+    id: "global-brain",
+    section: "AI Agent Concepts",
+    title: "Shared Agent Memory — The Global Brain",
+    subtitle: "Experimental: PeachBase as cross-agent knowledge layer",
+    bullets: [
+      "Problem: each agent starts from zero — no shared learning across projects",
+      "Idea: serverless Vector DB as persistent, cross-project brain",
+      "Agents READ context before tasks & WRITE learnings after",
+      "Example: Agent solves auth issue in Project A → Agent B finds solution for Project C",
+      "Collections: projects, decisions, contacts, learnings",
+      "MCP-ready: any agent framework can plug in via Model Context Protocol",
+    ],
+    svg: `<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 520 140\" class=\"w-full max-w-2xl mx-auto\">
+      <!-- Central brain -->
+      <rect x=\"190\" y=\"30\" width=\"140\" height=\"55\" rx=\"12\" fill=\"#8b5cf6\" fill-opacity=\"0.15\" stroke=\"#8b5cf6\" stroke-width=\"2\"/>
+      <text x=\"260\" y=\"55\" text-anchor=\"middle\" fill=\"#6d28d9\" font-size=\"13\" font-weight=\"700\">🧠 PeachBase</text>
+      <text x=\"260\" y=\"72\" text-anchor=\"middle\" fill=\"#6d28d9\" font-size=\"10\">(Vector DB)</text>
+      <!-- Agent 1 -->
+      <rect x=\"10\" y=\"10\" width=\"110\" height=\"35\" rx=\"8\" fill=\"#2563eb\" fill-opacity=\"0.15\" stroke=\"#2563eb\" stroke-width=\"1.5\"/>
+      <text x=\"65\" y=\"32\" text-anchor=\"middle\" fill=\"#1e40af\" font-size=\"11\" font-weight=\"600\">OpenClaw Agent</text>
+      <!-- Agent 2 -->
+      <rect x=\"10\" y=\"70\" width=\"110\" height=\"35\" rx=\"8\" fill=\"#059669\" fill-opacity=\"0.15\" stroke=\"#059669\" stroke-width=\"1.5\"/>
+      <text x=\"65\" y=\"92\" text-anchor=\"middle\" fill=\"#047857\" font-size=\"11\" font-weight=\"600\">Cursor Agent</text>
+      <!-- Agent 3 -->
+      <rect x=\"400\" y=\"10\" width=\"110\" height=\"35\" rx=\"8\" fill=\"#f59e0b\" fill-opacity=\"0.15\" stroke=\"#d97706\" stroke-width=\"1.5\"/>
+      <text x=\"455\" y=\"32\" text-anchor=\"middle\" fill=\"#b45309\" font-size=\"11\" font-weight=\"600\">CI/CD Agent</text>
+      <!-- Agent 4 -->
+      <rect x=\"400\" y=\"70\" width=\"110\" height=\"35\" rx=\"8\" fill=\"#ef4444\" fill-opacity=\"0.15\" stroke=\"#ef4444\" stroke-width=\"1.5\"/>
+      <text x=\"455\" y=\"92\" text-anchor=\"middle\" fill=\"#dc2626\" font-size=\"11\" font-weight=\"600\">Custom Agent</text>
+      <!-- Arrows -->
+      <path d=\"M120 27 L190 47\" stroke=\"#2563eb\" stroke-width=\"1.5\" marker-end=\"url(#arr-gb)\"/>
+      <path d=\"M120 87 L190 67\" stroke=\"#059669\" stroke-width=\"1.5\" marker-end=\"url(#arr-gb)\"/>
+      <path d=\"M400 27 L330 47\" stroke=\"#d97706\" stroke-width=\"1.5\" marker-end=\"url(#arr-gb)\"/>
+      <path d=\"M400 87 L330 67\" stroke=\"#ef4444\" stroke-width=\"1.5\" marker-end=\"url(#arr-gb)\"/>
+      <!-- Bidirectional labels -->
+      <text x=\"150\" y=\"28\" text-anchor=\"middle\" fill=\"#6b7280\" font-size=\"8\">read/write</text>
+      <text x=\"150\" y=\"82\" text-anchor=\"middle\" fill=\"#6b7280\" font-size=\"8\">read/write</text>
+      <text x=\"370\" y=\"28\" text-anchor=\"middle\" fill=\"#6b7280\" font-size=\"8\">read/write</text>
+      <text x=\"370\" y=\"82\" text-anchor=\"middle\" fill=\"#6b7280\" font-size=\"8\">read/write</text>
+      <!-- Collections -->
+      <text x=\"260\" y=\"115\" text-anchor=\"middle\" fill=\"#9ca3af\" font-size=\"9\">collections: projects · decisions · contacts · learnings</text>
+      <text x=\"260\" y=\"130\" text-anchor=\"middle\" fill=\"#9ca3af\" font-size=\"9\">transport: MCP (JSON-RPC) · serverless · AWS Lambda</text>
+      <defs><marker id=\"arr-gb\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto\"><path d=\"M0 0 L10 5 L0 10 z\" fill=\"#8b5cf6\"/></marker></defs>
+    </svg>`,
+    layout: "diagram",
+  },
+
   // --- Part 2: ai-secure.dev — Practical Example ---
   {
     id: "section-aisecure",
