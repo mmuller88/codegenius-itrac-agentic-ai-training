@@ -17,6 +17,43 @@ const SLIDES = [
     </div>`,
   },
   {
+    id: "about-me",
+    section: "Intro",
+    title: "Who am I?",
+    subtitle: "Martin Müller — AI Agent Builder & AWS Architect",
+    layout: "two-column",
+    cols: [
+      {
+        title: "What I Do",
+        bullets: [
+          "✈️🇨🇦 Senior Serverless Engineer @ Serverless Guru — AI chatbot for Air Canada",
+          "🔐 Senior Software Engineer @ Prowler Security — open-source cloud security",
+          "🔒 Founder of ai-secure.dev — automated compliance scanning",
+          "🦞 Building autonomous AI agents with OpenClaw",
+          "🏠 Founder of HalloCasa.com — international real estate platform",
+          "🍑 Creator of PeachBase — serverless vector DB on AWS",
+        ],
+      },
+      {
+        title: "Tech Stack",
+        bullets: [
+          "🤖 AI: LLMs, MCP, RAG, Vector DBs, Bedrock, AgentCore",
+          "⚡ Cloud: AWS CDK, Lambda, DynamoDB, ECS, CloudFront",
+          "💻 Code: TypeScript, Python, Rust, Java",
+          "🏆 AWS Professional Solutions Architect",
+          "☁️ AWS Community Builder since 2022",
+          "🎤 Speaker: AWS Community Day Athens 2026",
+        ],
+      },
+    ],
+    html: `<div style="display:flex;justify-content:center;gap:1.5rem;margin-top:1rem;font-size:13px">
+      <a href="https://martinmueller.dev/resume/" target="_blank" rel="noopener" style="color:#2563eb">📄 Full Resume</a>
+      <a href="https://linkedin.com/in/martinmueller88" target="_blank" rel="noopener" style="color:#2563eb">🔗 LinkedIn</a>
+      <a href="https://martinmueller.dev" target="_blank" rel="noopener" style="color:#2563eb">🌐 Blog</a>
+      <a href="https://calendly.com/martinmueller_dev" target="_blank" rel="noopener" style="color:#2563eb">📅 Book a Call</a>
+    </div>`,
+  },
+  {
     id: "agenda",
     section: "Intro",
     title: "Agenda",
