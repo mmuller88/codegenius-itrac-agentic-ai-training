@@ -56,6 +56,12 @@ const SLIDES = [
         <img src="https://www.awsicon.com/static/images/Service-Icons/Artificial-Intelligence/48/svg/Bedrock.svg" alt="AWS AgentCore" style="width:90px;height:90px;object-fit:contain" />
         <div style="margin-top:0.4rem;font-size:14px;font-weight:600;color:#374151">AWS AgentCore</div>
       </div>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:1.5rem">
+      <div style="text-align:center">
+        <img src="pics/telegram-agents.jpg" alt="Two OpenClaw AI agents on Telegram - neo (work) and nick (personal)" style="max-height:220px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.15)" />
+        <div style="margin-top:0.5rem;font-size:13px;color:#6b7280">My two OpenClaw agents: <b>neo</b> (work) &amp; <b>nick</b> (personal) on Telegram</div>
+      </div>
     </div>`,
     layout: "default",
   },
