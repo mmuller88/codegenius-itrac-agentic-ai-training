@@ -419,6 +419,10 @@ const SLIDES = [
       "Agent gets domain expertise it didn't have before",
       "Without skills: you prompt-engineer everything yourself",
       "With skills: agent reads SKILL.md, knows best practices",
+      "",
+      "💡 Key learning: It's NOT Skills vs MCP — they complement each other!",
+      "Skills = high-level instructions + context. MCP = low-level tool access.",
+      "A skill can use MCP servers internally — best of both worlds.",
     ],
     code: {
       lang: "bash",
