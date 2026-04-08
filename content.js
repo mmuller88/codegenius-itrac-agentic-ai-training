@@ -26,7 +26,7 @@ const SLIDES = [
       {
         title: "What I Do",
         bullets: [
-          "✈️🇨🇦 Senior Serverless Engineer @ Serverless Guru — AI chatbot for Air Canada",
+          "✈️🇨🇦 Senior Serverless Engineer @ Serverless Guru — AI chatbot for Air Canada — We're hiring! sls.guru/company/careers",
           "🔐 Senior Software Engineer @ Prowler Security — open-source cloud security",
           "🔒 Founder of ai-secure.dev — automated compliance scanning",
           "🦞 Building autonomous AI agents with OpenClaw",
@@ -51,10 +51,13 @@ const SLIDES = [
       <a href="https://linkedin.com/in/martinmueller88" target="_blank" rel="noopener" style="color:#2563eb">🔗 LinkedIn</a>
       <a href="https://martinmueller.dev" target="_blank" rel="noopener" style="color:#2563eb">🌐 Blog</a>
       <a href="https://calendly.com/martinmueller_dev" target="_blank" rel="noopener" style="color:#2563eb">📅 Book a Call</a>
-      <a href="https://www.sls.guru/company/careers" target="_blank" rel="noopener" style="color:#2563eb">🚀 Join SLS Guru</a>
     </div>
-    <div style="display:flex;justify-content:center;margin-top:0.8rem">
-      <img src="pics/family.jpg" alt="Martin with family" style="max-height:360px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.12)" />
+    <div style="display:flex;justify-content:center;gap:1.5rem;align-items:center;margin-top:0.8rem">
+      <img src="pics/family.jpg" alt="Martin with family" style="max-height:300px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.12)" />
+      <div style="text-align:center">
+        <img src="pics/sls-careers-qr.png" alt="SLS Guru Careers QR" style="width:140px;height:140px;border-radius:8px" />
+        <div style="font-size:12px;color:#6b7280;margin-top:0.3rem">🚀 sls.guru/careers</div>
+      </div>
     </div>`,
   },
   {
