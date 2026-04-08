@@ -1,5 +1,5 @@
 /**
- * Beyond Chatbots: Shipping Stateful AI Agents on AWS
+ * AWS Bedrock AgentCore - Building AI Agents from Local to Cloud
  * Slide content - 30 min presentation + 15 min Q&A
  * AI agent concepts + ai-secure.dev practical example + production patterns
  */
@@ -8,8 +8,8 @@ const SLIDES = [
   {
     id: "title",
     section: "Intro",
-    title: "Beyond Chatbots",
-    subtitle: "Shipping Stateful AI Agents on AWS",
+    title: "AWS Bedrock AgentCore",
+    subtitle: "Building AI Agents from Local to Cloud",
     layout: "title",
     html: `<div style="margin-top:2rem;display:flex;flex-direction:column;align-items:center;gap:1rem">
       <img src="linkedin_qr.jpg" alt="LinkedIn QR Code" style="width:180px;height:180px;border-radius:8px" />
@@ -51,6 +51,9 @@ const SLIDES = [
       <a href="https://linkedin.com/in/martinmueller88" target="_blank" rel="noopener" style="color:#2563eb">🔗 LinkedIn</a>
       <a href="https://martinmueller.dev" target="_blank" rel="noopener" style="color:#2563eb">🌐 Blog</a>
       <a href="https://calendly.com/martinmueller_dev" target="_blank" rel="noopener" style="color:#2563eb">📅 Book a Call</a>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:0.8rem">
+      <img src="pics/family.jpg" alt="Martin with family" style="max-height:180px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.12)" />
     </div>`,
   },
   {

@@ -29,6 +29,7 @@ const images = {
   'pics/combined3_split.jpg': { file: 'pics/combined3_split.jpg', mime: 'image/jpeg' },
   'pics/peachbase-global-brain.png': { file: 'pics/peachbase-global-brain.png', mime: 'image/png' },
   'pics/telegram-agents.jpg': { file: 'pics/telegram-agents.jpg', mime: 'image/jpeg' },
+  'pics/family.jpg': { file: 'pics/family.jpg', mime: 'image/jpeg' },
 };
 
 for (const [ref, info] of Object.entries(images)) {
