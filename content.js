@@ -254,6 +254,9 @@ const SLIDES = [
       "No MCP Server? Agents can't discover or call your API",
       "Transport: stdio (local) or HTTP+SSE (remote)",
       "JSON-RPC 2.0 messages: method + params → result",
+      "",
+      "🔒 Real-world example: I built an MCP server for ai-secure.dev",
+      "→ My AI agent can now: identify target companies, run ISO 27001 scans, draft outreach emails with findings & send them — all from a single chat message",
     ],
     svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 100" class="w-full max-w-2xl mx-auto">
       <rect x="10" y="30" width="80" height="40" rx="5" fill="#f59e0b" fill-opacity="0.15" stroke="#d97706" stroke-width="1.5"/>
