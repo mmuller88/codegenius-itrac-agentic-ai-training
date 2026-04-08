@@ -53,7 +53,7 @@ const SLIDES = [
       <a href="https://calendly.com/martinmueller_dev" target="_blank" rel="noopener" style="color:#2563eb">📅 Book a Call</a>
     </div>
     <div style="display:flex;justify-content:center;margin-top:0.8rem">
-      <img src="pics/family.jpg" alt="Martin with family" style="max-height:180px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.12)" />
+      <img src="pics/family.jpg" alt="Martin with family" style="max-height:360px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.12)" />
     </div>`,
   },
   {
