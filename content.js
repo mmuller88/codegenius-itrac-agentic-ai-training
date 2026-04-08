@@ -51,6 +51,7 @@ const SLIDES = [
       <a href="https://linkedin.com/in/martinmueller88" target="_blank" rel="noopener" style="color:#2563eb">🔗 LinkedIn</a>
       <a href="https://martinmueller.dev" target="_blank" rel="noopener" style="color:#2563eb">🌐 Blog</a>
       <a href="https://calendly.com/martinmueller_dev" target="_blank" rel="noopener" style="color:#2563eb">📅 Book a Call</a>
+      <a href="https://www.sls.guru/company/careers" target="_blank" rel="noopener" style="color:#2563eb">🚀 Join SLS Guru</a>
     </div>
     <div style="display:flex;justify-content:center;margin-top:0.8rem">
       <img src="pics/family.jpg" alt="Martin with family" style="max-height:360px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.12)" />
