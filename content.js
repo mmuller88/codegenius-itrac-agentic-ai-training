@@ -64,17 +64,18 @@ const SLIDES = [
     id: "agenda",
     section: "Intro",
     title: "Agenda",
-    bullets: [
-      "AI Agent Concepts — LLM, tools, memory, control loop, MCP, sub-agents, skills",
-      "ai-secure.dev — problem, user flow, architecture, toolbox, local to cloud",
-      "Production Patterns — challenges, cost, reliability",
-      "LLM Prompt Hacking — attacks, mitigation, testing",
-      "Q&A",
-    ],
-    html: `<div style="display:flex;justify-content:center;margin-top:1rem">
-      <img src="pics/ai-secure-landing.png" alt="ai-secure.dev" style="max-height:220px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.12)" />
-    </div>`,
     layout: "default",
+    html: `<ul>
+      <li>AI Agent Concepts — LLM, tools, memory, control loop, MCP, sub-agents, skills</li>
+      <li>ai-secure.dev — problem, user flow, architecture, toolbox, local to cloud
+        <div style="display:flex;justify-content:center;margin:1rem 0">
+          <img src="pics/ai-secure-landing.png" alt="ai-secure.dev" style="max-height:660px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.12)" />
+        </div>
+      </li>
+      <li>Production Patterns — challenges, cost, reliability</li>
+      <li>LLM Prompt Hacking — attacks, mitigation, testing</li>
+      <li>Q&amp;A</li>
+    </ul>`,
   },
   {
     id: "why-agent-concepts",
