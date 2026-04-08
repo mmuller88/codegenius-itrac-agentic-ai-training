@@ -68,6 +68,9 @@ const SLIDES = [
       "LLM Prompt Hacking — attacks, mitigation, testing",
       "Q&A",
     ],
+    html: `<div style="display:flex;justify-content:center;margin-top:1rem">
+      <img src="pics/ai-secure-landing.png" alt="ai-secure.dev" style="max-height:220px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.12)" />
+    </div>`,
     layout: "default",
   },
   {
