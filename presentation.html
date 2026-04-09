@@ -118,6 +118,24 @@
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       }
       section.slide { position: relative; }
+      @media (max-width: 600px) {
+        body { font-size: 15px; }
+        :root { --padx: 0.75rem; --pady: 1rem; }
+        .grid2 { grid-template-columns: 1fr !important; }
+        .grid3 { grid-template-columns: 1fr !important; }
+        .title-slide { padding-top: 1.5rem; }
+        .title-slide h1 { font-size: 1.5rem; }
+        h1 { font-size: 1.4rem; }
+        h3 { font-size: 1rem; }
+        pre { font-size: 12px; overflow-x: auto; }
+        .code { overflow-x: auto; }
+        img { max-width: 100% !important; height: auto !important; max-height: none !important; }
+        svg { max-width: 100%; height: auto; }
+        .footer-nav .inner { flex-direction: column; gap: 0.5rem; }
+        .progress { min-width: 100px; }
+        ul { padding-left: 1.2rem; }
+        li { font-size: 14px; }
+      }
       @media print {
         header.site, .footer-nav { display: none; }
         section.slide { display: block !important; page-break-after: always; }

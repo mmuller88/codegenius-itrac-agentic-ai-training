@@ -11,16 +11,16 @@ const SLIDES = [
     title: "AWS Bedrock AgentCore",
     subtitle: "Building AI Agents from Local to Cloud",
     layout: "title",
-    html: `<div style="margin-top:2rem;display:flex;justify-content:center;gap:2.5rem;align-items:center">
+    html: `<div style="margin-top:2rem;display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;align-items:center">
       <div style="text-align:center">
-        <img src="pics/presentation-qr.png" alt="Presentation QR" style="width:160px;height:160px;border-radius:8px" />
+        <img src="pics/presentation-qr.png" alt="Presentation QR" style="width:140px;height:140px;border-radius:8px" />
         <div style="font-size:12px;color:#6b7280;margin-top:0.3rem">This Presentation</div>
       </div>
       <div style="text-align:center">
-        <img src="linkedin_qr.jpg" alt="LinkedIn QR Code" style="width:160px;height:160px;border-radius:8px" />
+        <img src="linkedin_qr.jpg" alt="LinkedIn QR Code" style="width:140px;height:140px;border-radius:8px" />
         <div style="font-size:12px;color:#6b7280;margin-top:0.3rem">LinkedIn</div>
       </div>
-      <div style="font-size:16px;display:flex;flex-direction:column;gap:0.4rem">
+      <div style="font-size:15px;display:flex;flex-direction:column;gap:0.3rem">
         <span>linkedin.com/in/martinmueller88</span>
         <span>martinmueller.dev</span>
         <span>ai-secure.dev</span>
