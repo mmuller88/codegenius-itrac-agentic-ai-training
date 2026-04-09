@@ -391,6 +391,10 @@ const SLIDES = [
         ],
       },
     ],
+    html: `<div style="margin-top:1.2rem;padding:1rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px">
+      <strong>🤔 MCP vs CLI — what do you think?</strong><br>
+      The discussion is interesting and probably depends on the use case. CLI tools are battle-tested, scriptable, and already everywhere. MCP adds discoverability + schema for AI agents. Maybe the answer isn't either/or — happy for input!
+    </div>`,
   },
   {
     id: "sub-agents",
