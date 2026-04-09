@@ -31,6 +31,7 @@ const images = {
   'pics/telegram-agents.jpg': { file: 'pics/telegram-agents.jpg', mime: 'image/jpeg' },
   'pics/family.jpg': { file: 'pics/family.jpg', mime: 'image/jpeg' },
   'pics/sls-careers-qr.png': { file: 'pics/sls-careers-qr.png', mime: 'image/png' },
+  'pics/presentation-qr.png': { file: 'pics/presentation-qr.png', mime: 'image/png' },
 };
 
 for (const [ref, info] of Object.entries(images)) {
