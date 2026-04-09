@@ -13,7 +13,11 @@ const SLIDES = [
     layout: "title",
     html: `<div style="margin-top:2rem;display:flex;flex-direction:column;align-items:center;gap:1rem">
       <img src="linkedin_qr.jpg" alt="LinkedIn QR Code" style="width:180px;height:180px;border-radius:8px" />
-      <a href="https://www.linkedin.com/in/martinmueller88/" target="_blank" rel="noopener" style="font-size:18px">linkedin.com/in/martinmueller88</a>
+      <div style="font-size:16px;display:flex;flex-direction:column;align-items:center;gap:0.4rem">
+        <span>linkedin.com/in/martinmueller88</span>
+        <span>martinmueller.dev</span>
+        <span>ai-secure.dev</span>
+      </div>
     </div>`,
   },
   {
