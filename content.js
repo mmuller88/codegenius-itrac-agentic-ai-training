@@ -207,6 +207,9 @@ const SLIDES = [
       <text x="65" y="30" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="600">User</text>
       <rect x="180" y="10" width="80" height="30" rx="4" fill="#f59e0b" fill-opacity="0.15" stroke="#d97706" stroke-width="1.5"/>
       <text x="220" y="30" text-anchor="middle" fill="#b45309" font-size="12" font-weight="600">Runtime</text>
+      <!-- Runtime examples -->
+      <text x="220" y="52" text-anchor="middle" fill="#92400e" font-size="8" font-style="italic">Local machine · EC2 · Lambda</text>
+      <text x="220" y="62" text-anchor="middle" fill="#92400e" font-size="8" font-style="italic">AgentCore Runtime · ECS / Fargate</text>
       <rect x="345" y="10" width="70" height="30" rx="4" fill="#2563eb" fill-opacity="0.15" stroke="#2563eb" stroke-width="1.5"/>
       <text x="380" y="30" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="600">LLM</text>
       <rect x="510" y="10" width="70" height="30" rx="4" fill="#059669" fill-opacity="0.15" stroke="#059669" stroke-width="1.5"/>
