@@ -8,8 +8,8 @@ const SLIDES = [
   {
     id: "title",
     section: "Intro",
-    title: "AWS Bedrock AgentCore",
-    subtitle: "Building AI Agents from Local to Cloud",
+    title: "AI Security Agents in Production",
+    subtitle: "with AWS AgentCore",
     layout: "title",
     html: `<div style="margin-top:2rem;display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;align-items:center">
       <div style="text-align:center">
@@ -53,7 +53,6 @@ const SLIDES = [
           "💻 Code: TypeScript, Python, Rust, Java",
           "🏆 AWS Professional Solutions Architect",
           "☁️ AWS Community Builder since 2022",
-          "🎤 Speaker: AWS Community Day Athens 2026",
         ],
       },
     ],
@@ -653,6 +652,48 @@ npx skills install seo-audit
           "TOTP generation for 2FA",
           "Issue tracking, streaming progress",
         ],
+        codeBlocks: [
+          {
+            label: "src/agent/index.ts — http_security_check",
+            lang: "typescript",
+            text: `tool({
+  name: 'http_security_check',
+  description: 'Headers, TLS cert, redirect chain — for ISO 27001 audits',
+  inputSchema: z.object({
+    url: z.string(),
+    method: z.enum(['GET','HEAD','OPTIONS','TRACE']).default('HEAD'),
+    includeTls: z.boolean().default(true),
+    followRedirects: z.boolean().default(true),
+  }),
+  callback: async ({ url, method, includeTls, followRedirects }) => {
+    const res = await fetchFollow(url, { method, followRedirects, max: 5 })
+
+    const required = [
+      'strict-transport-security', 'content-security-policy',
+      'x-frame-options', 'x-content-type-options', 'referrer-policy',
+    ]
+    const headers = Object.fromEntries(required.map(h => [h, res.headers[h] ?? 'NOT SET']))
+
+    let tls
+    if (includeTls && url.startsWith('https://')) {
+      const cert = res.socket.getPeerCertificate(true)
+      const daysUntilExpiry = Math.floor(
+        (new Date(cert.valid_to).getTime() - Date.now()) / 86400000,
+      )
+      tls = {
+        protocol: res.socket.getProtocol(),
+        cipher: res.socket.getCipher().name,
+        issuer: cert.issuer.O,
+        daysUntilExpiry,
+        certExpiresSoon: daysUntilExpiry <= 30,
+      }
+    }
+
+    return { statusCode: res.statusCode, headers, tls, redirectChain: res.chain }
+  },
+})`,
+          },
+        ],
       },
     ],
   },
@@ -698,52 +739,34 @@ npx skills install seo-audit
     layout: "title",
   },
   {
-    id: "production-challenges",
+    id: "production-learnings",
     section: "Production Patterns",
-    title: "Production Challenges",
-    subtitle: "ai-secure as example",
-    bullets: [
-      "State isolation — multi-tenant scans running concurrently",
-      "Tool orchestration — retries, timeouts, sequencing",
-      "Browser runtime — local Chromium → managed AgentCore Browser",
-      "Reliability — logging, tracing, debugging agent decisions",
-    ],
-    layout: "default",
-  },
-  {
-    id: "cost-reliability",
-    section: "Production Patterns",
-    title: "Cost + Reliability Knobs",
+    title: "Production Learnings",
+    subtitle: "What I'd tell myself before building",
     layout: "two-column",
     cols: [
       {
-        title: "Cost",
+        title: "🛑 Don't build an agent (yet)",
         bullets: [
-          "Model routing: cheap model for simple steps",
-          "Caching: repeated context cost reduction",
-          "Disable extended thinking when not needed",
+          "So many agents already exist — don't reinvent",
+          "Validate your use case on Claude Code or Cursor first",
+          "Just add MCP tools or CLIs — often that's enough",
+          "Works there? → then go custom and optimize cost + output quality",
+          "Saves weeks of infra work for a hypothesis that may not hold",
         ],
       },
       {
-        title: "Reliability",
+        title: "🚀 When you do build",
         bullets: [
-          "Retries & backoff for rate limits",
-          "Tool error handling — graceful degradation",
-          "Streaming so users see progress in real-time",
+          "Steal tool patterns from Claude Code / Cursor — schemas, naming, error shapes",
+          "Local Chromium → managed AgentCore Browser in cloud",
+          "Cost: model routing (cheap for simple steps) + prompt caching",
+          "Tight observability on cost — catch runaway spend fast",
+          "Reliability: retries, backoff, graceful tool errors",
+          "Streaming for live progress, tracing for debugging decisions",
         ],
       },
     ],
-  },
-  {
-    id: "production-takeaway",
-    section: "Production Patterns",
-    title: "Production Takeaway",
-    bullets: [
-      "ai-secure = agent + tools + infra + reliability",
-      "Same patterns apply to any agent product",
-      "Framework matters less than tool design and error handling",
-    ],
-    layout: "default",
   },
 
   // --- Part 4: LLM Prompt Hacking ---
